@@ -1,0 +1,15 @@
+{"level":"error","message":"Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T15:37:37.200Z"}
+{"level":"error","message":"Model info error: Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T15:37:37.201Z"}
+{"level":"error","message":"Error: Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T15:37:37.202Z"}
+{"level":"error","message":"Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T15:51:47.677Z"}
+{"level":"error","message":"Model info error: Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T15:51:47.679Z"}
+{"level":"error","message":"Error: Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T15:51:47.681Z"}
+{"level":"error","message":"Failed to load model: ENOENT: no such file or directory, open 'C:\\Users\\Enoca\\Downloads\\bitirme\\backend\\models\\model.json'","timestamp":"2025-05-07T15:55:39.841Z"}
+{"level":"error","message":"Model info error: Failed to load model: ENOENT: no such file or directory, open 'C:\\Users\\Enoca\\Downloads\\bitirme\\backend\\models\\model.json'","timestamp":"2025-05-07T15:55:39.844Z"}
+{"level":"error","message":"Error: Failed to load model: ENOENT: no such file or directory, open 'C:\\Users\\Enoca\\Downloads\\bitirme\\backend\\models\\model.json'","timestamp":"2025-05-07T15:55:39.847Z"}
+{"level":"error","message":"Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T16:11:53.682Z"}
+{"level":"error","message":"Model info error: Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T16:11:53.684Z"}
+{"level":"error","message":"Error: Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T16:11:53.687Z"}
+{"level":"error","message":"Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T16:16:54.271Z"}
+{"level":"error","message":"Model info error: Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T16:16:54.273Z"}
+{"level":"error","message":"Error: Failed to load model: An InputLayer should be passed either a `batchInputShape` or an `inputShape`.","timestamp":"2025-05-07T16:16:54.275Z"}
