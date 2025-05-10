@@ -3,7 +3,6 @@ import random
 
 # Define headers
 headers = ['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall', 'label']
-
 # Define crop parameter ranges from the document with modified names to avoid encoding issues
 crop_types = {
     # Tahıllar
@@ -365,6 +364,21 @@ def generate_crop_data(crop_name, ranges, sample_count=80):
     
     return data
 
+def generate_no_crop_data(sample_count=80):
+    """Mevcut mahsul aralıklarının dışında rastgele değerlerle 'YETISMEZ' sınıfı için veri üretir."""
+    data = []
+    for _ in range(sample_count):
+        # Her parametre için, mevcut aralıkların dışında rastgele değer üret
+        n = random.choice([random.randint(0, 3), random.randint(151, 200)])
+        p = random.choice([random.randint(0, 24), random.randint(91, 120)])
+        k = random.choice([random.randint(0, 14), random.randint(141, 200)])
+        temp = random.choice([round(random.uniform(0, 12.9), 6), round(random.uniform(28.1, 40.0), 6)])
+        humidity = random.choice([round(random.uniform(0, 15.2), 6), round(random.uniform(70.1, 100.0), 6)])
+        ph = random.choice([round(random.uniform(0, 5.0), 6), round(random.uniform(8.7, 10.0), 6)])
+        rainfall = random.choice([random.randint(0, 299), random.randint(801, 1200)])
+        data.append([n, p, k, temp, humidity, ph, rainfall, "YETISMEZ"])
+    return data
+
 def main():
     # Tüm mahsuller için veri oluştur
     all_data = []
@@ -373,9 +387,14 @@ def main():
         crop_data = generate_crop_data(crop_name, ranges, 80)
         all_data.extend(crop_data)
     
+    # 'YETISMEZ' sınıfı için veri oluştur ve ekle
+    print("YETISMEZ sınıfı için 80 örnek oluşturuluyor...")
+    no_crop_data = generate_no_crop_data(80)
+    all_data.extend(no_crop_data)
+    
     # Toplam veri sayısını hesapla
     total_samples = len(all_data)
-    print(f"Toplam {total_samples} örnek oluşturuldu ({len(crop_types)} mahsul x 80 örnek).")
+    print(f"Toplam {total_samples} örnek oluşturuldu ({len(crop_types)} mahsul x 80 + 80 YETISMEZ örneği).")
     
     # Verileri CSV dosyasına yaz
     output_file = 'Ic_Anadolu_35_Mahsul_Verileri_80x.csv'
