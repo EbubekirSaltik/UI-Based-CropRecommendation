@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation API Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .endpoint {
+            border-left: 4px solid #198754;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+        .method {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .url {
+            font-family: monospace;
+            background-color: #f8f9fa;
+            padding: 3px 6px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="mb-4">Crop Recommendation API Documentation</h1>
+        
+        <div class="alert alert-info">
+            This API provides crop recommendations based on soil and environmental parameters.
+        </div>
+
+        <h2>API Endpoints</h2>
+
+        <div class="endpoint">
+            <h3>Get Crop Recommendations</h3>
+            <p><span class="method">GET</span> <span class="url">/api/predict</span></p>
+            
+            <h4>Query Parameters:</h4>
+            <ul>
+                <li><code>Nitrogen</code> - Nitrogen content in soil (required)</li>
+                <li><code>Phosporus</code> - Phosphorus content in soil (required)</li>
+                <li><code>Potassium</code> - Potassium content in soil (required)</li>
+                <li><code>Temperature</code> - Temperature in Celsius (required)</li>
+                <li><code>Humidity</code> - Humidity percentage (required)</li>
+                <li><code>Ph</code> - pH value of soil (required)</li>
+                <li><code>Rainfall</code> - Rainfall in mm (required)</li>
+            </ul>
+
+            <h4>Example Request:</h4>
+            <pre>GET /api/predict?Nitrogen=90&Phosporus=42&Potassium=43&Temperature=20.87&Humidity=82.00&Ph=6.50&Rainfall=202.93</pre>
+
+            <h4>Example Response:</h4>
+            <pre>{
+  "status": "success",
+  "input_parameters": {
+    "Nitrogen": 90,
+    "Phosporus": 42,
+    "Potassium": 43,
+    "Temperature": 20.87,
+    "Humidity": 82.00,
+    "Ph": 6.50,
+    "Rainfall": 202.93
+  },
+  "recommendations": [
+    {
+      "crop": "Rice",
+      "probability": 0.92
+    },
+    {
+      "crop": "Maize",
+      "probability": 0.03
+    },
+    ...
+  ]
+}</pre>
+        </div>
+
+        <div class="endpoint">
+            <h3>Submit Crop Parameters</h3>
+            <p><span class="method">POST</span> <span class="url">/api/predict</span></p>
+            
+            <h4>Request Body (JSON):</h4>
+            <pre>{
+  "Nitrogen": 90,
+  "Phosporus": 42,
+  "Potassium": 43,
+  "Temperature": 20.87,
+  "Humidity": 82.00,
+  "Ph": 6.50,
+  "Rainfall": 202.93
+}</pre>
+
+            <h4>Example Response:</h4>
+            <pre>{
+  "status": "success",
+  "input_parameters": {
+    "Nitrogen": 90,
+    "Phosporus": 42,
+    "Potassium": 43,
+    "Temperature": 20.87,
+    "Humidity": 82.00,
+    "Ph": 6.50,
+    "Rainfall": 202.93
+  },
+  "recommendations": [
+    {
+      "crop": "Rice",
+      "probability": 0.92
+    },
+    {
+      "crop": "Maize",
+      "probability": 0.03
+    },
+    ...
+  ]
+}</pre>
+        </div>
+
+        <h2>Error Responses</h2>
+        <p>The API will return appropriate error messages with HTTP status codes:</p>
+
+        <div class="mb-4">
+            <h4>400 Bad Request</h4>
+            <pre>{
+  "error": "Missing parameters. Required: Nitrogen, Phosporus, Potassium, Temperature, Humidity, Ph, Rainfall"
+}</pre>
+            <p>or</p>
+            <pre>{
+  "error": "All parameters must be numeric values"
+}</pre>
+        </div>
+
+        <div>
+            <h4>500 Internal Server Error</h4>
+            <pre>{
+  "error": "Error message details"
+}</pre>
+        </div>
+
+        <h2>Integration Example</h2>
+        <pre>// JavaScript fetch example
+fetch('/api/predict?Nitrogen=90&Phosporus=42&Potassium=43&Temperature=20.87&Humidity=82.00&Ph=6.50&Rainfall=202.93')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));</pre>
+
+        <div class="mt-5">
+            <a href="/" class="btn btn-primary">Back to Crop Recommendation Form</a>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
