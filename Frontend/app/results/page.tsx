@@ -6,12 +6,22 @@ import { PageHeader } from '@/components/page-header';
 import { ResultsDisplay } from '@/components/results/results-display';
 import { RecommendationChart } from '@/components/results/recommendation-chart';
 import { LoadingResults } from '@/components/results/loading-results';
+import { usePredictionStore } from '@/stores/predictionStores';
+import axios from 'axios';
 
 export default function ResultsPage() {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState<any>(null);
+  const {inputData}=usePredictionStore()
+  console.log(inputData);
+  useEffect(()=>{
 
+  const getData=async ()=>{
+     const data= await axios.post('http://127.0.0.1:5000/predict',{...inputData})
+  }
+
+  },[])
   useEffect(() => {
     // Simulate loading time for future API integration
     const timer = setTimeout(() => {
@@ -35,7 +45,7 @@ export default function ResultsPage() {
       
       setResults(mockResults);
       setLoading(false);
-    }, 2500);
+    }, 1000);
     
     return () => clearTimeout(timer);
   }, [searchParams]);

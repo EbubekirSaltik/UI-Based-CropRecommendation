@@ -6,12 +6,14 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Loader2 } from 'lucide-react';
+import axios from 'axios'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { usePredictionStore } from '@/stores/predictionStores';
 
 const formSchema = z.object({
   nitrogen: z.number().min(0).max(140),
@@ -28,6 +30,7 @@ type FormValues = z.infer<typeof formSchema>;
 export function RecommendationForm() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const {setInputData}=usePredictionStore()
 
   const defaultValues: FormValues = {
     nitrogen: 50,
@@ -44,17 +47,15 @@ export function RecommendationForm() {
     defaultValues,
   });
 
-  function onSubmit(data: FormValues) {
+ async  function onSubmit(data: FormValues) {
     setIsSubmitting(true);
-    
-    // In a real app, this would send data to the Python model API
-    // For now, we'll simulate a delay and redirect to the results page
+
     setTimeout(() => {
       const params = new URLSearchParams();
       Object.entries(data).forEach(([key, value]) => {
         params.append(key, value.toString());
       });
-      
+      console.log(form.getValues)
       router.push(`/results?${params.toString()}`);
     }, 1500);
   }
