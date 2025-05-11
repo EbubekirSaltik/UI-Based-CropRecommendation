@@ -55,9 +55,10 @@ export function RecommendationForm() {
       Object.entries(data).forEach(([key, value]) => {
         params.append(key, value.toString());
       });
-      console.log(form.getValues)
+     const values = form.getValues();
+       setInputData(values);
       router.push(`/results?${params.toString()}`);
-    }, 1500);
+    }, 500);
   }
 
   return (

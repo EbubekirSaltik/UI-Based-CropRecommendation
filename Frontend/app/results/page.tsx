@@ -13,13 +13,25 @@ export default function ResultsPage() {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState<any>(null);
-  const {inputData}=usePredictionStore()
-  console.log(inputData);
+  const {inputData,setResult}=usePredictionStore()
+  
   useEffect(()=>{
 
   const getData=async ()=>{
-     const data= await axios.post('http://127.0.0.1:5000/predict',{...inputData})
-  }
+    try {
+       const data= await axios.post('http://127.0.0.1:5000/predict',{...inputData},{
+       headers: {
+        'Content-Type': 'application/json'
+      }
+     })
+      setResult(data.data.predictions)
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+    }
+  getData()
 
   },[])
   useEffect(() => {

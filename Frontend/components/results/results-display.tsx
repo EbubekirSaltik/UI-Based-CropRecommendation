@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Progress } from '@/components/ui/progress';
+import { usePredictionStore } from '@/stores/predictionStores';
 
 interface ResultsDisplayProps {
   results: {
@@ -28,6 +29,9 @@ interface ResultsDisplayProps {
 }
 
 export function ResultsDisplay({ results }: ResultsDisplayProps) {
+  const {result}=usePredictionStore()
+  console.log(result);
+  
   return (
     <div>
       <motion.div 
@@ -38,9 +42,9 @@ export function ResultsDisplay({ results }: ResultsDisplayProps) {
       >
         <h2 className="text-2xl font-bold mb-4">Top Recommendations</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {results.recommended_crops.map((crop, index) => (
+          {result?.map((crop, index) => (
             <motion.div
-              key={crop.name}
+              key={crop[0]}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -53,16 +57,16 @@ export function ResultsDisplay({ results }: ResultsDisplayProps) {
                 )}
                 <div 
                   className="w-full h-48 bg-cover bg-center" 
-                  style={{ backgroundImage: `url(${crop.imageUrl})` }}
+                  style={{ backgroundImage: `url(${results.recommended_crops[0].imageUrl})` }}
                 />
                 <CardHeader className="pb-2">
-                  <CardTitle>{crop.name}</CardTitle>
+                  <CardTitle>{crop[0]}</CardTitle>
                   <CardDescription>
-                    Match Confidence: {Math.round(crop.confidence * 100)}%
+                    Match Confidence: {Math.round(crop[1] * 100)}%
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Progress value={crop.confidence * 100} className="h-2" />
+                  <Progress value={crop[1] * 100} className="h-2" />
                   <div className="flex mt-4 gap-2 flex-wrap">
                     <Badge variant="outline" className="bg-primary/10">
                       {getPHRating(results.soil_analysis.ph)}

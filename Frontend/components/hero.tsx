@@ -18,7 +18,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            Grow the <span className="text-primary">Right Crops</span> for Your Land
+            Grow the <span className="text-primary text-red-500">Right Crops</span> for Your Land
           </motion.h1>
           
           <motion.p 

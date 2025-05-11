@@ -1,6 +1,9 @@
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { usePredictionStore } from '@/stores/predictionStores';
+import { Loader2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 interface RecommendationChartProps {
@@ -13,10 +16,28 @@ interface RecommendationChartProps {
 }
 
 export function RecommendationChart({ results }: RecommendationChartProps) {
-  const data = results.recommended_crops.map(crop => ({
-    name: crop.name,
-    confidence: Math.round(crop.confidence * 100),
-  }));
+   const {result}=usePredictionStore()
+ const [loading, setLoading] = useState(true)
+ useEffect(() => {
+  const timeoutId = setTimeout(() => {
+    setLoading(false);
+  }, 1000);
+
+  return () => clearTimeout(timeoutId);
+}, []);
+   if(loading){
+    return  <div className="relative mb-8">
+          <Loader2 className="h-12 w-12 animate-spin text-primary" />
+          <div className="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-primary/10 animate-ping" />
+        </div>
+        
+   }
+   
+  const data = result?.map(crop => ({
+    name: crop[0],
+    confidence: Math.round(crop[1] * 100),
+  }))
+  .slice(0, 5);
 
   const COLORS = ['hsl(var(--chart-1))', 'hsl(var(--chart-2))', 'hsl(var(--chart-3))'];
 
@@ -46,7 +67,7 @@ export function RecommendationChart({ results }: RecommendationChartProps) {
                 }}
               />
               <Bar dataKey="confidence" radius={[0, 4, 4, 0]}>
-                {data.map((entry, index) => (
+                {data?.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Bar>
