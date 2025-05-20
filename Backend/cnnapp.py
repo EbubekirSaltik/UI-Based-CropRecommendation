@@ -17,6 +17,7 @@ with open('crop_mapping.json') as f:
 crop_dict = {int(k): v for k, v in crop_mapping.items()}  # Handle JSON key->str conversion
 
 @app.route('/predict', methods=['POST'])
+
 def predict():
     try:
         data = request.get_json() if request.is_json else request.form

@@ -7,6 +7,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Search } from 'lucide-react';
+import  { CropData } from '@/constant';
+import Image from 'next/image';
 
 type Crop = {
   id: number;
@@ -21,88 +23,15 @@ type Crop = {
   description: string;
 };
 
-// Mock data for crops
-const cropsData: Crop[] = [
-  {
-    id: 1,
-    name: 'Rice',
-    category: 'Cereal',
-    soilType: ['Clay', 'Loamy'],
-    phRange: '5.5-6.5',
-    climate: ['Tropical', 'Subtropical'],
-    waterNeeds: 'High',
-    growingSeason: 'Summer',
-    imageUrl: 'https://images.pexels.com/photos/7457031/pexels-photo-7457031.jpeg',
-    description: 'Rice is a staple food for over half of the world\'s population. It grows well in waterlogged conditions with high humidity.'
-  },
-  {
-    id: 2,
-    name: 'Wheat',
-    category: 'Cereal',
-    soilType: ['Loamy', 'Clay Loam'],
-    phRange: '6.0-7.0',
-    climate: ['Temperate', 'Subtropical'],
-    waterNeeds: 'Moderate',
-    growingSeason: 'Winter/Spring',
-    imageUrl: 'https://images.pexels.com/photos/326082/pexels-photo-326082.jpeg',
-    description: 'Wheat is a widely cultivated grass cereal grain. It requires moderate rainfall and grows well in cool conditions.'
-  },
-  {
-    id: 3,
-    name: 'Maize (Corn)',
-    category: 'Cereal',
-    soilType: ['Loamy', 'Sandy Loam'],
-    phRange: '5.8-7.0',
-    climate: ['Temperate', 'Tropical'],
-    waterNeeds: 'Moderate',
-    growingSeason: 'Summer',
-    imageUrl: 'https://images.pexels.com/photos/547263/pexels-photo-547263.jpeg',
-    description: 'Maize is a widely grown cereal grain that was domesticated in Mesoamerica. It prefers well-drained soils and warm conditions.'
-  },
-  {
-    id: 4,
-    name: 'Tomato',
-    category: 'Vegetable',
-    soilType: ['Loamy', 'Sandy Loam'],
-    phRange: '6.0-6.8',
-    climate: ['Temperate', 'Mediterranean'],
-    waterNeeds: 'Moderate',
-    growingSeason: 'Summer',
-    imageUrl: 'https://images.pexels.com/photos/533280/pexels-photo-533280.jpeg',
-    description: 'Tomatoes are a good source of vitamin C and lycopene. They grow best in well-drained soils with consistent moisture.'
-  },
-  {
-    id: 5,
-    name: 'Cotton',
-    category: 'Fiber',
-    soilType: ['Loamy', 'Black Cotton Soil'],
-    phRange: '5.8-8.0',
-    climate: ['Tropical', 'Subtropical'],
-    waterNeeds: 'Moderate',
-    growingSeason: 'Summer',
-    imageUrl: 'https://images.pexels.com/photos/4752858/pexels-photo-4752858.jpeg',
-    description: 'Cotton is a soft, fluffy staple fiber that grows in a protective case around the seeds of cotton plants. It requires a long, frost-free period.'
-  },
-  {
-    id: 6,
-    name: 'Potato',
-    category: 'Vegetable',
-    soilType: ['Sandy Loam', 'Loamy'],
-    phRange: '5.0-6.5',
-    climate: ['Temperate', 'Cool'],
-    waterNeeds: 'Moderate',
-    growingSeason: 'Spring/Summer',
-    imageUrl: 'https://images.pexels.com/photos/144248/potatoes-vegetables-erdfrucht-bio-144248.jpeg',
-    description: 'Potatoes are starchy tubers that are a staple food in many parts of the world. They grow best in well-drained, loose soil.'
-  },
-];
+
 
 export function CropsList() {
   const [searchQuery, setSearchQuery] = useState('');
   const categories = ['All', 'Cereal', 'Vegetable', 'Fiber'];
   const [activeCategory, setActiveCategory] = useState('All');
+  // console.log(CropData);
   
-  const filteredCrops = cropsData.filter(crop => {
+  const filteredCrops =CropData.filter(crop => {
     const matchesSearch = crop.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           crop.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = activeCategory === 'All' || crop.category === activeCategory;
@@ -148,9 +77,12 @@ export function CropsList() {
           {filteredCrops.map(crop => (
             <Card key={crop.id} className="overflow-hidden flex flex-col h-full">
               <div 
-                className="w-full h-48 bg-cover bg-center" 
-                style={{ backgroundImage: `url(${crop.imageUrl})` }}
-              />
+                className="w-full relative h-48 bg-cover bg-center" 
+              
+              >
+                 <Image alt='name-crop' src={crop.imageUrl} fill className="object-cover"/>
+              </div>
+             
               <CardHeader className="pb-2">
                 <div className="flex justify-between items-start">
                   <CardTitle>{crop.name}</CardTitle>

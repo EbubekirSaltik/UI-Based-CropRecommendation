@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Progress } from '@/components/ui/progress';
 import { usePredictionStore } from '@/stores/predictionStores';
+import { imageData } from '@/constant';
+import Image from 'next/image';
 
 interface ResultsDisplayProps {
   results: {
@@ -30,7 +32,6 @@ interface ResultsDisplayProps {
 
 export function ResultsDisplay({ results }: ResultsDisplayProps) {
   const {result}=usePredictionStore()
-  console.log(result);
   
   return (
     <div>
@@ -42,51 +43,59 @@ export function ResultsDisplay({ results }: ResultsDisplayProps) {
       >
         <h2 className="text-2xl font-bold mb-4">Top Recommendations</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {result?.map((crop, index) => (
-            <motion.div
-              key={crop[0]}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card className="h-full overflow-hidden hover:shadow-lg transition-shadow relative">
-                {index === 0 && (
-                  <div className="absolute top-0 right-0 bg-primary text-primary-foreground py-1 px-3 text-sm font-medium">
-                    Best Match
+        {result?.map((crop, index) => {
+            const cropName = crop[0].replace(/_/g, ' '); // Replace underscores with spaces
+            const image = imageData.find((img) => img.label === cropName);
+            const imageUrl = image ? image.uri : 'URL_TO_DEFAULT_IMAGE'; // replace 'URL_TO_DEFAULT_IMAGE' with a default image URL
+           if(crop[1] *100<1) return null;
+            return (
+              <motion.div
+                key={crop[0]}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="h-full overflow-hidden hover:shadow-lg relative">
+                  {index === 0 && (
+                    <div className="absolute top-0 right-0 bg-primary text-primary-foreground py-1 px-3 text-sm font-medium">
+                      Best Match
+                    </div>
+                  )}
+                  <div
+                    className="w-full relative h-48 bg-cover bg-center"
+                    
+                  >
+<Image src={imageUrl} fill alt='image-rul'/>
                   </div>
-                )}
-                <div 
-                  className="w-full h-48 bg-cover bg-center" 
-                  style={{ backgroundImage: `url(${results.recommended_crops[0].imageUrl})` }}
-                />
-                <CardHeader className="pb-2">
-                  <CardTitle>{crop[0]}</CardTitle>
-                  <CardDescription>
-                    Match Confidence: {Math.round(crop[1] * 100)}%
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Progress value={crop[1] * 100} className="h-2" />
-                  <div className="flex mt-4 gap-2 flex-wrap">
-                    <Badge variant="outline" className="bg-primary/10">
-                      {getPHRating(results.soil_analysis.ph)}
-                    </Badge>
-                    <Badge variant="outline" className="bg-primary/10">
-                      {getWaterRating(results.soil_analysis.rainfall)}
-                    </Badge>
-                    <Badge variant="outline" className="bg-primary/10">
-                      {getTemperatureRating(results.soil_analysis.temperature)}
-                    </Badge>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="outline" size="sm" className="w-full">
-                    View Details
-                  </Button>
-                </CardFooter>
-              </Card>
-            </motion.div>
-          ))}
+                  <CardHeader className="pb-2">
+                    <CardTitle>{crop[0]}</CardTitle>
+                    <CardDescription>
+                      Match Confidence: {Math.round(crop[1] * 100)}%
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Progress value={crop[1] * 100} className="h-2" />
+                    <div className="flex mt-4 gap-2 flex-wrap">
+                      <Badge variant="outline" className="bg-primary/10">
+                        {getPHRating(results.soil_analysis.ph)}
+                      </Badge>
+                      <Badge variant="outline" className="bg-primary/10">
+                        {getWaterRating(results.soil_analysis.rainfall)}
+                      </Badge>
+                      <Badge variant="outline" className="bg-primary/10">
+                        {getTemperatureRating(results.soil_analysis.temperature)}
+                      </Badge>
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <Button variant="outline" size="sm" className="w-full">
+                      View Details
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </motion.div>
+            );
+          })}
         </div>
       </motion.div>
 
