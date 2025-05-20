@@ -20,13 +20,10 @@ crop_dict = {int(k): v for k, v in crop_mapping.items()}  # Handle JSON key->str
 def predict():
     try:
         data = request.get_json() if request.is_json else request.form
-        
         # Match EXACTLY with your training columns ['N','P','K','temperature','humidity','ph','rainfall']
         required = ['nitrogen', 'phosphorus', 'potassium', 'temperature', 'humidity', 'ph', 'rainfall']
-       
         if not all(key in data for key in required):
             return jsonify({"error": f"Missing parameters. Required: {required}"}), 400
-
         # Extract in THE SAME ORDER as training data
         feature_list = [
             float(data['nitrogen']),
@@ -37,15 +34,12 @@ def predict():
             float(data['ph']),
             float(data['rainfall'])
         ]
-
         # Preprocess
         scaled_features = scaler.transform(np.array(feature_list).reshape(1, -1))
         # Predict
         probabilities = model.predict(scaled_features)[0]
-        
         # Get top 10 indices with highest probabilities
         top_10_indices = np.argsort(probabilities)[::-1][:10]  # descending order
-
 # Map to crop labels (assuming label_encoder or a list of crop names)
         top_10_crops = [(label_encoder.inverse_transform([i])[0], float(probabilities[i].item())) for i in top_10_indices]
         # params = {key: data[key] for key in required}

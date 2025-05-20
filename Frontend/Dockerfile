@@ -3,7 +3,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY . .
 RUN npm install
-RUN npm run build
+RUN npm run dev
 
 # Serve with a lightweight server
 FROM node:20-alpine
