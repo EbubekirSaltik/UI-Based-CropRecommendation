@@ -129,8 +129,8 @@ The system provides recommendations for **35 different crop types** optimized fo
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/cropsage.git
-cd cropsage
+git clone https://github.com/EbubekirSaltik/UI-Based-CropRecommendation.git
+cd UI-Based-CropRecommendation
 ```
 
 ### 2. Frontend Setup
@@ -277,9 +277,6 @@ We welcome contributions! Please follow these steps:
 - Update documentation as needed
 - Ensure code passes all linting checks
 
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -290,19 +287,19 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 📞 Support
 
-- 📧 **Email**: support@cropsage.com
-- 💬 **Discord**: [Join our community](https://discord.gg/cropsage)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/cropsage/issues)
-- 📚 **Documentation**: [Full Documentation](https://docs.cropsage.com)
+- 📧 **Email**: compengineer001@gmail.com
+- 🐛 **Issues**: [GitHub Issues](https://github.com/EbubekirSaltik/UI-Based-CropRecommendation/issues)
+- 📚 **Documentation**: [Full Documentation](https://github.com/EbubekirSaltik/UI-Based-CropRecommendation#readme)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/EbubekirSaltik/UI-Based-CropRecommendation/discussions)
 
 ---
 
 <div align="center">
   <p><strong>Made with ❤️ for the agricultural community</strong></p>
   <p>
-    <a href="https://github.com/yourusername/cropsage/stargazers">⭐ Star this project</a> •
-    <a href="https://github.com/yourusername/cropsage/fork">🍴 Fork it</a> •
-    <a href="https://github.com/yourusername/cropsage/issues">🐛 Report bug</a>
+    <a href="https://github.com/EbubekirSaltik/UI-Based-CropRecommendation/stargazers">⭐ Star this project</a> •
+    <a href="https://github.com/EbubekirSaltik/UI-Based-CropRecommendation/fork">🍴 Fork it</a> •
+    <a href="https://github.com/EbubekirSaltik/UI-Based-CropRecommendation/issues">🐛 Report bug</a>
   </p>
 </div>
 
