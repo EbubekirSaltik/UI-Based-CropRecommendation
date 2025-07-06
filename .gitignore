@@ -1,0 +1,177 @@
+# CropSage - Project .gitignore
+
+# =====================================
+# Python
+# =====================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# =====================================
+# Virtual Environment
+# =====================================
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# =====================================
+# IDE and Editor
+# =====================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# =====================================
+# Data Generation Scripts (Development Only)
+# =====================================
+Model/Script/Script.py
+Model/Script/
+**/Script.py
+**/data_generation.py
+**/generate_data.py
+
+# =====================================
+# Jupyter Notebook Checkpoints
+# =====================================
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# =====================================
+# Machine Learning Models (Large Files)
+# =====================================
+*.pkl
+*.h5
+*.hdf5
+*.joblib
+*.model
+*.weights
+
+# But keep the essential models for production
+!Backend/model.pkl
+!Backend/minmaxscaler.pkl
+!Backend/models/*.pkl
+
+# =====================================
+# Data Files
+# =====================================
+*.csv
+*.json
+*.xlsx
+*.xls
+# But keep essential config files
+!Backend/crop_mapping.json
+!Frontend/package.json
+!Backend/package.json
+!Frontend/components.json
+!Frontend/next.config.ts
+!Frontend/tsconfig.json
+!Frontend/tailwind.config.ts
+!Frontend/postcss.config.js
+
+# =====================================
+# Environment Variables
+# =====================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# =====================================
+# Logs
+# =====================================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# =====================================
+# Node.js
+# =====================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# =====================================
+# Next.js
+# =====================================
+.next/
+out/
+build/
+
+# =====================================
+# Docker
+# =====================================
+.docker/
+docker-compose.override.yml
+
+# =====================================
+# Temporary Files
+# =====================================
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# =====================================
+# Documentation (if auto-generated)
+# =====================================
+docs/build/
+site/
+
+# =====================================
+# Test Coverage
+# =====================================
+coverage/
+.coverage
+.pytest_cache/
+.coverage.*
+
+# =====================================
+# Database
+# =====================================
+*.db
+*.sqlite
+*.sqlite3
+
+# =====================================
+# Deployment
+# =====================================
+.vercel
+.netlify/
+
+# =====================================
+# Backup files
+# =====================================
+*~
+*.bak
+*.backup 
